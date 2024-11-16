@@ -1,0 +1,39 @@
+package analizara;
+
+public enum Token{
+    RESERVADAS,
+    
+    PARENTESIS_DER,
+    PARENTESIS_IZQ,
+    ASIGNAR,
+    IGUAL,
+    SUMA,
+    RESTA,
+    MULTIPLICACION,
+    DIVISION,
+    POTENCIA,
+    MODULO,
+    PUNTO_COMA,
+    MENOR_IGUAL,
+    MAYOR_IGUAL,
+    MENOR,
+    MAYOR,
+    LLAVE_IZQ,
+    LLAVE_DER,
+    CORCHETE_IZQ,
+    CORCHETE_DER,
+    COMA,
+    PUNTO,
+    ANTIDIAGONAL,
+    DOS_PUNTOS,
+    COMILLA_SIMPLE,
+    COMILLA_DOBLE,
+    DIFERENTE,
+    IMPRIMIR,
+    METODO_IMPRIMIR,
+    
+    IDENTIFICADOR,
+    VALOR_NUMERICO,
+    
+    ERROR
+}

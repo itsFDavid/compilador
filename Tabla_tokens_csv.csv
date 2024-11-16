@@ -1,0 +1,71 @@
+Token,Token #,Lexema
+public,1,‘publico’
+private,2,‘privado´
+protected,3,‘protegido’
+String,4,‘cadena’
+Char,5,’caracter'
+Int,6,’entero’
+Double,7,’doble’
+Float,8,‘flotante’
+Boolean,9,’boleano’
+If,10,’si’
+While,11,’mientras’
+For,12,’hasta’
+else,13,’sino’
+Switch,14,’opcion’
+Case,15,’caso’
+Break,16,’rompe’
+do,17,’hacer’
+parentesisIzq,18,’(‘
+parentesisDer,19,’)’
+opSuma,20,’+’
+opResta,21,’-‘
+puntoComa,22,’;’
+opDivision,23,’/‘
+opMultiplicacion,24,’*’
+opModulo,25,’%’
+asignar,26,’=‘
+menorIgual,27,’<=‘
+menor,28,’<‘
+mayor,29,’>’
+mayorIgual,30,’>=‘
+llaveIzq,31,’{‘
+llaveDer,32,‘}’
+corcheteIzq,33,‘[‘
+corcheteDer,34,‘]’
+y,35,‘y'
+O,36,‘o’
+identificador,37,‘IDENTIFICADOR’
+class,38,‘clase’
+system.out.print,39,‘imprimir’
+return,40,‘regresa’
+void,41,‘vacio’
+null,42,‘nulo’
+coma,43,"‘,’"
+punto,44,‘.’
+guionBajo,45,‘_’
+antidiagonal,46,‘\’
+dosPuntos,47,‘:’
+comillaSimple,48,‘ ‘ ‘
+comillaDoble,49,‘ “ ‘
+diferente,50,‘!=‘
+new,51,‘nuevo’
+import,52,‘importar’
+static,53,‘estatico’
+extends,54,‘extiende’
+implements,55,‘implementa’
+interface,56,‘interface’
+try,57,‘intentar’
+catch,58,‘capturar’
+Else if,59,‘de otro modo’
+True,60,‘Verdadero’
+False,61,‘Falso’
+opPotencia,62,‘^’
+Igual,63,‘==‘
+
+,,,,
+Amarill,Palabras reservadas,,,
+naranja,simbolos,,,
+azul,"Se elimiino de la tabla, no lo uses",,,
+rojo,"Metodo, se esta viendo si se usa",,,
+identificador,Ese si se pone,,,

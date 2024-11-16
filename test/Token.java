@@ -1,0 +1,5 @@
+package analizara;
+
+public enum Token{
+    ID,INT,SUMA,RESTA,MULTIPLICACION,DIVISION,POTENCIA,ASIGNAR,ERROR
+}
