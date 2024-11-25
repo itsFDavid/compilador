@@ -1,9 +1,1 @@
-publico clase Leer{
-	doble num = 12.03;
-	flotante f = 12.0283;
-	
-	publico doble sum(){
-		imprimir(f+num);
-		retorna f+num;
-	}
-}
+clase
