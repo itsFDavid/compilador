@@ -7,6 +7,7 @@ package analizara;
 import static analizara.Token.ERROR;
 import static analizara.Token.IDENTIFICADOR;
 import static analizara.Token.VALOR_NUMERICO;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +17,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -29,6 +31,27 @@ public class interfaz extends javax.swing.JFrame {
     public interfaz() {
         initComponents();
         setLocationRelativeTo(null);
+        
+
+        ImageIcon closeWindow = new ImageIcon(getClass().getResource("/resources/cerrarSimbolo.png"));
+        Image imagen = closeWindow.getImage().getScaledInstance(40, 30, Image.SCALE_SMOOTH);;
+        ImageIcon imagenEscaladaClose = new ImageIcon(imagen);
+
+        ImageIcon logOutIcon = new ImageIcon(getClass().getResource("/resources/cerrar-sesion.png"));
+        Image imagenLogOut = logOutIcon.getImage().getScaledInstance(40, 30, Image.SCALE_SMOOTH);;
+        ImageIcon imagenEscaladaLogOut = new ImageIcon(imagenLogOut);
+        
+        closeWBtn.setIcon(imagenEscaladaClose);
+        logoutBtn.setIcon(imagenEscaladaLogOut);
+
+        closeWBtn.setContentAreaFilled(false);
+        closeWBtn.setBorderPainted(false);
+        closeWBtn.setFocusPainted(false);
+        
+        logoutBtn.setContentAreaFilled(false);
+        logoutBtn.setBorderPainted(false);
+        logoutBtn.setFocusPainted(false);
+        
     }
 
     /**
@@ -48,6 +71,8 @@ public class interfaz extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
+        closeWBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +102,18 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
 
+        closeWBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeWBtnActionPerformed(evt);
+            }
+        });
+
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,14 +134,20 @@ public class interfaz extends javax.swing.JFrame {
                             .addComponent(jScrollPane2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(closeWBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(closeWBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(logoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -131,9 +174,28 @@ public class interfaz extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        openLogin();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void closeWBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeWBtnActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        System.exit(0);
+    }//GEN-LAST:event_closeWBtnActionPerformed
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        // TODO add your handling code here:
+        openLogin();
+        
+        // logica para cerrar sesion o algo asi
+        
+    }//GEN-LAST:event_logoutBtnActionPerformed
+    
+    private void openLogin(){
+        dispose();
+        login log = new login();
+        log.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -214,6 +276,7 @@ public class interfaz extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton closeWBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -222,5 +285,6 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JButton logoutBtn;
     // End of variables declaration//GEN-END:variables
 }
