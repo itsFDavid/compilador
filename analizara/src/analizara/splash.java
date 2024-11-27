@@ -43,6 +43,7 @@ public class splash extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Cascadia Code PL", 0, 24)); // NOI18N
         jLabel1.setText("Abriendo Compilador");
 
+        jProgressBar1.setBackground(new java.awt.Color(255, 0, 255));
         jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jProgressBar1StateChanged(evt);
