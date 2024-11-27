@@ -6,7 +6,7 @@ public class Analizara{
 
 
     public static void main(String[] args){
-        String path="/Users/david/Desktop/Universidad/SEMESTRE_5/LYA/compilador/analizara/src/analizara/lexer.flex";
+        String path="/Users/danielyeraynogueziniestra/Desktop/Automatas/compilador/analizara/src/analizara/lexer.flex";
         generar(path);
     }
 
