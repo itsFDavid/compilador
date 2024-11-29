@@ -40,7 +40,10 @@ public class UserRepository {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()){
                 String hashedPassword = rs.getString("password");
-                return PasswordUtils.verifyPassword(password, hashedPassword);
+                String hpsw = PasswordUtils.hashPassword(password);
+                if(hashedPassword.equals(hpsw)){
+                    return true;
+                }
             }else{
                 System.err.println("usuario no encontrado");
                 return false;
@@ -49,5 +52,6 @@ public class UserRepository {
             e.printStackTrace();
             return false;
         }
+        return false;
     }
 }

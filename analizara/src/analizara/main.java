@@ -1,5 +1,8 @@
 package analizara;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
+
 
 public class main {
     public static void main(String args[]) {
@@ -29,7 +32,7 @@ public class main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new splash().setVisible(true);
+                new splash().setVisible(true);   
             }
         });
     }
