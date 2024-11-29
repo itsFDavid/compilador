@@ -23,9 +23,9 @@ public class Database {
     
     public static void createUserTable(){
         String sql = "CREATE TABLE IF NOT EXISTS users("
-                + "id INTERGER PRIMARY KEY AUTOINCREMENT,"
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "username TEXT NOT NULL UNIQUE,"
-                + "password TEXT NOT NULL";
+                + "password TEXT NOT NULL);";
         
         try(Connection conn = connect();
             Statement stmt = conn.createStatement()){

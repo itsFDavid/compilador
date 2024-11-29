@@ -26,6 +26,7 @@ public class UserRepository {
             return true;
         }catch(SQLException e){
             e.printStackTrace();
+            System.out.println("No se pudo");
             return false;
         }
     }
