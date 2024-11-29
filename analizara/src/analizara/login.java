@@ -164,6 +164,8 @@ public class login extends javax.swing.JFrame {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         
+        
+        
         register res = new register();
         res.setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
