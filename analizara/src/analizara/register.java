@@ -58,9 +58,9 @@ public class register extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Ingresa un nombre de usuario");
+        jLabel2.setText("Ingresa el nombre de usuario");
 
-        jLabel3.setText("Ingresa una contraseña");
+        jLabel3.setText("Ingresa la contraseña");
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +70,7 @@ public class register extends javax.swing.JFrame {
 
         jLabel4.setText("Confirma la contraseña");
 
-        jTextField3.setText("jTextField3");
+        jTextField3.setText("");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
