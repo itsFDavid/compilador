@@ -32,22 +32,8 @@ public class main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new splash().setVisible(true);
-                String text = "hola";
-                String text2 = "hola";
-                String text3 = "emiliano";
-                String hashp = PasswordUtils.hashPassword(text);
-                String hashp2 = PasswordUtils.hashPassword(text2);
-                String hashp3 = PasswordUtils.hashPassword(text3);
-                System.err.println(hashp);
-                System.err.println(hashp2);
-                System.err.println(hashp3);
-                if(hashp.equals(hashp2)){
-                    System.out.println("true");
-                }
+                new splash().setVisible(true);   
             }
-            
-            
         });
     }
 }
