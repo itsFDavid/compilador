@@ -7,6 +7,7 @@ package analizara;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -163,24 +164,39 @@ public class login extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
+        
+        
+        
         register res = new register();
         res.setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(false);
     }//GEN-LAST:event_btnRegisterActionPerformed
-
+    
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         
         /*
         Comprobacion de credenciales
         */
-        interfaz inter = new interfaz();
-        inter.setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        dispose();
-    }//GEN-LAST:event_btnLoginActionPerformed
+        
+        String user = txtUser.getText();
+        String pws = new String(txtPsw.getPassword());
+        
+        if(!UserRepository.loginUser(user, pws)){
+            JOptionPane.showMessageDialog(this, "Datos incorrectos, por favor verifique");
+        }else{
+            JOptionPane.showMessageDialog(this, "Bienvenido " + user.toUpperCase());
+            interfaz inter = new interfaz();
+            inter.setVisible(true);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            dispose();
+        }
+        
+        
 
+    }//GEN-LAST:event_btnLoginActionPerformed
+    
     /**
      * @param args the command line arguments
      */

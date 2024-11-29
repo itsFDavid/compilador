@@ -18,6 +18,7 @@ public class splash extends javax.swing.JFrame {
      */
     public splash() {
         initComponents();
+        Database.createUserTable();
         setLocationRelativeTo(null);
         startProgress();
     }
