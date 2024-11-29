@@ -4,10 +4,6 @@
  */
 package analizara;
 
-/**
- *
- * @author david
- */
 public class register extends javax.swing.JFrame {
 
     /**
