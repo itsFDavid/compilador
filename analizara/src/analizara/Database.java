@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 
 
 /**
@@ -31,6 +33,27 @@ public class Database {
             Statement stmt = conn.createStatement()){
             stmt.execute(sql);
             System.out.println("Tabla users creada o ya existente");
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public static void viewTable(){
+        String sql = "SELECT * FROM users;";
+        
+        try(Connection conn = Database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            ResultSet rs = pstmt.executeQuery();
+            
+            System.out.println("tabla usuarios");
+            while(rs.next()){
+                String name = rs.getString("username");
+                String psw = rs.getString("password");
+                System.out.println("Name: " + name);
+                System.out.println("hashedPass: "+ psw);
+                System.out.println("");
+                
+            }
             
         }catch(SQLException e){
             e.printStackTrace();

@@ -8,12 +8,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author PAKO031147
  */
 public class UserRepository {
-    public static boolean registerUser(String username, String password){
+    public static boolean registerUser(String username, String password, JFrame ventana){
         String sql = "INSERT INTO users(username, password) VALUES (?,?)";
         
         try(Connection conn = Database.connect();
@@ -25,7 +27,9 @@ public class UserRepository {
             System.out.println("Usuario registrado exitosamente");
             return true;
         }catch(SQLException e){
-            e.printStackTrace();
+            if(e.getMessage().contains("SQLITE_CONSTRAINT_UNIQUE")){
+                JOptionPane.showMessageDialog(ventana, "El usuario ya existe");
+            }
             System.out.println("No se pudo");
             return false;
         }
@@ -55,4 +59,7 @@ public class UserRepository {
         }
         return false;
     }
+    
+    
+    
 }

@@ -183,8 +183,13 @@ public class login extends javax.swing.JFrame {
         String user = txtUser.getText();
         String pws = new String(txtPsw.getPassword());
         
+        if(user.isEmpty() || pws.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Datos vacios, por favor verifica.");
+            return;
+        }
+        
         if(!UserRepository.loginUser(user, pws)){
-            JOptionPane.showMessageDialog(this, "Datos incorrectos, por favor verifique");
+            JOptionPane.showMessageDialog(this, "Usuario no encontrado");
         }else{
             JOptionPane.showMessageDialog(this, "Bienvenido " + user.toUpperCase());
             interfaz inter = new interfaz();
