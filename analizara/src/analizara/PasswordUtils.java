@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package analizara;
+package analizara; 
 
-import src.org.mindrot.jbcrypt.BCrypt;
-import 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -13,10 +16,14 @@ import
  */
 public class PasswordUtils {
     public static String hashPassword(String password){
-        return BCrypt.hashpw(password, BCrypt.gensalt(12));
+        try {
+            String hashedPassword = DigestUtils.md5Hex(password);
+            return hashedPassword;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+            
+        }
     }
-    
-    public static boolean verifyPassword(String password, String hashedPassword){
-        return BCrypt.checkpw(password, hashedPassword);
-    }
+
 }
