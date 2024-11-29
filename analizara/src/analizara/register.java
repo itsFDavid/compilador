@@ -74,7 +74,7 @@ public class register extends javax.swing.JFrame {
 
         jLabel4.setText("Confirma la contraseña");
 
-        jTextField3.setText("jTextField3");
+        jTextField3.setText("");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
