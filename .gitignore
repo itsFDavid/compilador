@@ -3,7 +3,7 @@ analizara/build/classes/analizara/register\$*.class
 analizara/fichero.txt
 
 .DS_Store
-*/.DS_Store
+**/*.DS_Store
 */.DS_Store?
 */._*
 
