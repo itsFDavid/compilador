@@ -1,7 +1,7 @@
 package analizara;
 
 public enum Token{
-    RESERVADAS,
+    Falso,
     
     PARENTESIS_DER,
     PARENTESIS_IZQ,
@@ -35,5 +35,38 @@ public enum Token{
     IDENTIFICADOR,
     VALOR_NUMERICO,
     
-    ERROR
+    ERROR,
+    
+    Linea,
+    Privado,
+    Publico,
+    Protegido,
+    Cadena,
+    Caracter,
+    Entero,
+    Doble,
+    Flotante,
+    Booleano,
+    Si,
+    Mientras,
+    Opcion,
+    Caso,
+    Break,
+    Hacer,
+    Clase,
+    Retorno,
+    Vacio,
+    Nulo,
+    Nuevo,
+    Exitende,
+    Implementa,
+    Interface,
+    Intentar,
+    Capturar,
+    De_otro_modo,
+    Y,
+    O,
+    Verdadero
+    
+    
 }
