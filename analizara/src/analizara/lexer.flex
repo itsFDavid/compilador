@@ -8,44 +8,44 @@ import static analizara.Token.*;
 
 L=[a-zA-Z_]
 D=[0-9]
-WHITE=[ \t\r\n]
+WHITE=[ ,\t,\r]
 %{
 public String tipo;
 %}
 
 %% 
-publico |
-privado |
-protegido |
-Cadena |
-caracter |
-entero |
-doble |
-flotante |
-booleano |
-si |
-mientras |
-opcion |
-caso |
-break |
-hacer |
-clase |
-retorno |
-vacio |
-nulo |
-nuevo |
-importar |
-estatico |
-extiende |
-implementa |
-interface |
-intentar |
-capturar |
-de otro modo |
-y |
-o |
-verdadero |
-falso {tipo=yytext(); return RESERVADAS;}
+publico {tipo=yytext(); return Publico;}
+privado {tipo=yytext(); return Privado;}
+protegido {tipo=yytext(); return Protegido;}
+cadena {tipo=yytext(); return Cadena;}
+caracter {tipo=yytext(); return Caracter;}
+entero {tipo=yytext(); return Entero;}
+doble {tipo=yytext(); return Doble;}
+flotante {tipo=yytext(); return Flotante;}
+booleano {tipo=yytext(); return Booleano;}
+si {tipo=yytext(); return Si;}
+mientras {tipo=yytext(); return Mientras;}
+opcion {tipo=yytext(); return Opcion;}
+caso {tipo=yytext(); return Caso;}
+break {tipo=yytext(); return Break;}
+hacer {tipo=yytext(); return Hacer;}
+clase {tipo=yytext(); return Clase;}
+retorno {tipo=yytext(); return Retorno;}
+vacio {tipo=yytext(); return Vacio;}
+nulo {tipo=yytext(); return Nulo;}
+nuevo {tipo=yytext(); return Nuevo;}
+importar {tipo=yytext(); return Importar;}
+estatico {tipo=yytext(); return Estatico;}
+extiende {tipo=yytext(); return Extiende;}
+implementa {tipo=yytext(); return Implementa;}
+interface {tipo=yytext(); return Interface;}
+intentar {tipo=yytext(); return Intentar;}
+capturar {tipo=yytext(); return Capturar;}
+de otro modo {tipo=yytext(); return De_otro_modo;}
+y {tipo=yytext(); return Y;}
+o {tipo=yytext(); return O;}
+verdadero {tipo=yytext(); return Verdadero;}
+falso {tipo=yytext(); return Falso;}
 
 {WHITE} {/*Ignore*/}
 "//".* {/*Ignore*/}
@@ -74,6 +74,7 @@ falso {tipo=yytext(); return RESERVADAS;}
 "'"     {return COMILLA_SIMPLE;}
 "!="    {return DIFERENTE;}
 "imprimir"  {return METODO_IMPRIMIR;}
+"\n"    {return Linea;}
 
 
 {L}({L}|{D})* {tipo=yytext(); return IDENTIFICADOR;} 
