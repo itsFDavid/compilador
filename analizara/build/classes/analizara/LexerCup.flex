@@ -55,7 +55,7 @@ de otro modo {return new Symbol(sym.De_otro_modo, yychar, yyline, yytext());}
 y {return new Symbol(sym.Y, yychar, yyline, yytext());}
 o {return new Symbol(sym.O, yychar, yyline, yytext());}
 verdadero {return new Symbol(sym.Verdadero, yychar, yyline, yytext());}
-falso {return new Symbol(sym.Falso, yychar, yyline, yytext());}
+falso {return new Symbol(sym.RESERVADAS, yychar, yyline, yytext());}
 
 {WHITE} {/*Ignore*/}
 "//".* {/*Ignore*/}

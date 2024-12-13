@@ -1,7 +1,6 @@
 package analizara;
 
 public enum Token{
-    Falso,
     RESERVADAS,
     
     PARENTESIS_DER,
