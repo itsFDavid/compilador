@@ -2,6 +2,7 @@ package analizara;
 
 public enum Token{
     Falso,
+    RESERVADAS,
     
     PARENTESIS_DER,
     PARENTESIS_IZQ,
@@ -24,7 +25,6 @@ public enum Token{
     CORCHETE_DER,
     COMA,
     PUNTO,
-    ANTIDIAGONAL,
     DOS_PUNTOS,
     COMILLA_SIMPLE,
     COMILLA_DOBLE,
@@ -49,6 +49,7 @@ public enum Token{
     Booleano,
     Si,
     Mientras,
+    Estatico,
     Opcion,
     Caso,
     Break,
@@ -58,12 +59,13 @@ public enum Token{
     Vacio,
     Nulo,
     Nuevo,
-    Exitende,
+    Extiende,
     Implementa,
     Interface,
     Intentar,
     Capturar,
     De_otro_modo,
+    Importar,
     Y,
     O,
     Verdadero
