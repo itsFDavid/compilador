@@ -45,7 +45,7 @@ de otro modo {tipo=yytext(); return De_otro_modo;}
 y {tipo=yytext(); return Y;}
 o {tipo=yytext(); return O;}
 verdadero {tipo=yytext(); return Verdadero;}
-falso {tipo=yytext(); return RESERVADAS;}
+falso {tipo=yytext(); return Falso;}
 
 {WHITE} {/*Ignore*/}
 "//".* {/*Ignore*/}
