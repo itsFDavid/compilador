@@ -4,10 +4,7 @@
  */
 package analizara;
 
-import static analizara.Token.ERROR;
-import static analizara.Token.IDENTIFICADOR;
-import static analizara.Token.VALOR_NUMERICO;
-import static analizara.Token.RESERVADAS;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,8 +13,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_cup.runtime.Symbol;
 import javax.swing.ImageIcon;
 
 /**
@@ -190,6 +189,7 @@ public class interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
                 try{
             probarLexer();
+            probarSintax();
         }catch(IOException ex){
             Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null,ex);
         }
@@ -269,35 +269,51 @@ public class interfaz extends javax.swing.JFrame {
         Reader reader = new BufferedReader (new FileReader("fichero.txt"));
         Lexer lexer = new Lexer (reader);
         int cont = 1;
-        String resultado = "LINEA " + cont + "\n";
+        String resultado = "LINEA --> " + cont + "\t\tSIMBOLO\n";
         
         while(true){
             Token token = lexer.yylex();
             if(token==null){
-                resultado = resultado + "FIN";
+                resultado += "FIN";
                 jTextArea1.setText(resultado);
                 return;
             }
             
             switch(token){
-                case ERROR:
+                case Error:
                     resultado += "ERROR TOKEN NO ENCONTRADO\n";
                     break;
                 case Linea:
                     cont++;
-                    resultado += "LINEA " + cont +"\n";
+                    resultado += "LINEA --> " + cont +"\n";
                     break;
-                case IDENTIFICADOR:
-                case VALOR_NUMERICO: 
-                case RESERVADAS:
-                    resultado += "TOKEN: "+ token +" "+ lexer.tipo+"\n";
+                case Identificador:
+                case Valor_numerico: 
+                    resultado += "TOKEN --> "+ token +"\t"+ lexer.tipo+ "\n";
                     break;
                 
                 default:
-                    resultado += "TOKEN: "+ token + "\n";
+                    resultado += "TOKEN --> "+ token +"\t"+ lexer.tipo+ "\n";
                     break;
             }
         }
+    }
+    public void probarSintax(){
+        String ST = jTextArea2.getText();
+        Sintax s = new Sintax(new analizara.LexerCup(new StringReader(ST)));
+        
+        try {
+            s.parse();
+            jTextArea3.setText("Analisis realizado correctamente");
+            jTextArea3.setForeground(new Color(25, 111, 61));
+        } catch (Exception ex) {
+            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            Symbol sym = s.getS();
+             jTextArea3.setText("Error de sintaxis: Linea --> " + (sym.right + 1) + "Columna --> "
+                     + (sym.left + 1 + ", Texto : \"" + sym.value + "\""));
+            jTextArea3.setForeground(Color.red);
+        }
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
