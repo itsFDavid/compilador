@@ -12,7 +12,7 @@ import java_cup.runtime.Symbol;
 
 L=[a-zA-Z_]
 D=[0-9]
-WHITE=[ ,\t,\r,\n]
+WHITE=[ \t\r\n]
 %{
     private Symbol symbol(int type, Object value){
         return new Symbol(type, yyline, yycolumn, value);
@@ -59,36 +59,37 @@ falso {return new Symbol(sym.Falso, yychar, yyline, yytext());}
 
 {WHITE} {/*Ignore*/}
 "//".* {/*Ignore*/}
-")"     {return new Symbol(sym.PARENTESIS_DER, yychar, yyline, yytext());} 
-"("     {return new Symbol(sym.PARENTESIS_IZQ, yychar, yyline, yytext());} 
-"="     {return new Symbol(sym.ASIGNAR, yychar, yyline, yytext());} 
-"=="    {return new Symbol(sym.IGUAL, yychar, yyline, yytext());} 
-"+"     {return new Symbol(sym.SUMA, yychar, yyline, yytext());} 
-"-"     {return new Symbol(sym.RESTA, yychar, yyline, yytext());} 
-"*"     {return new Symbol(sym.MULTIPLICACION, yychar, yyline, yytext());} 
-"/"     {return new Symbol(sym.DIVISION, yychar, yyline, yytext());} 
-"^"     {return new Symbol(sym.POTENCIA, yychar, yyline, yytext());} 
-"%"     {return new Symbol(sym.MODULO, yychar, yyline, yytext());} 
-";"     {return new Symbol(sym.PUNTO_COMA, yychar, yyline, yytext());} 
-"<="    {return new Symbol(sym.MENOR_IGUAL, yychar, yyline, yytext());} 
-">="    {return new Symbol(sym.MAYOR_IGUAL, yychar, yyline, yytext());} 
-"<"     {return new Symbol(sym.MENOR, yychar, yyline, yytext());} 
-">"     {return new Symbol(sym.MAYOR, yychar, yyline, yytext());} 
-"{"     {return new Symbol(sym.LLAVE_IZQ, yychar, yyline, yytext());} 
-"}"     {return new Symbol(sym.LLAVE_DER, yychar, yyline, yytext());} 
-"["     {return new Symbol(sym.CORCHETE_IZQ, yychar, yyline, yytext());} 
-"]"     {return new Symbol(sym.CORCHETE_DER, yychar, yyline, yytext());} 
-","     {return new Symbol(sym.COMA, yychar, yyline, yytext());} 
-"."     {return new Symbol(sym.PUNTO, yychar, yyline, yytext());}
-":"     {return new Symbol(sym.DOS_PUNTOS, yychar, yyline, yytext());} 
-"'"     {return new Symbol(sym.COMILLA_SIMPLE, yychar, yyline, yytext());}
-"!="    {return new Symbol(sym.DIFERENTE, yychar, yyline, yytext());}
-"imprimir"  {return new Symbol(sym.METODO_IMPRIMIR, yychar, yyline, yytext());}
+")"     {return new Symbol(sym.Parentesis_der, yychar, yyline, yytext());} 
+"("     {return new Symbol(sym.Parentesis_izq, yychar, yyline, yytext());} 
+"="     {return new Symbol(sym.Asignar, yychar, yyline, yytext());} 
+"=="    {return new Symbol(sym.Igual, yychar, yyline, yytext());} 
+"+"     {return new Symbol(sym.Suma, yychar, yyline, yytext());} 
+"-"     {return new Symbol(sym.Resta, yychar, yyline, yytext());} 
+"*"     {return new Symbol(sym.Multiplicacion, yychar, yyline, yytext());} 
+"/"     {return new Symbol(sym.Division, yychar, yyline, yytext());} 
+"^"     {return new Symbol(sym.Potencia, yychar, yyline, yytext());} 
+"%"     {return new Symbol(sym.Modulo, yychar, yyline, yytext());} 
+";"     {return new Symbol(sym.Punto_coma, yychar, yyline, yytext());} 
+"<="    {return new Symbol(sym.Menor_igual, yychar, yyline, yytext());} 
+">="    {return new Symbol(sym.Mayor_igual, yychar, yyline, yytext());} 
+"<"     {return new Symbol(sym.Menor, yychar, yyline, yytext());} 
+">"     {return new Symbol(sym.Mayor, yychar, yyline, yytext());} 
+"{"     {return new Symbol(sym.Llave_izq, yychar, yyline, yytext());} 
+"}"     {return new Symbol(sym.Llave_der, yychar, yyline, yytext());} 
+"["     {return new Symbol(sym.Corchete_izq, yychar, yyline, yytext());} 
+"]"     {return new Symbol(sym.Corchete_der, yychar, yyline, yytext());} 
+","     {return new Symbol(sym.Coma, yychar, yyline, yytext());} 
+"."     {return new Symbol(sym.Punto, yychar, yyline, yytext());}
+":"     {return new Symbol(sym.Dos_puntos, yychar, yyline, yytext());} 
+"'"     {return new Symbol(sym.Comilla_simple, yychar, yyline, yytext());}
+"!="    {return new Symbol(sym.Diferente, yychar, yyline, yytext());}
+"imprimir"  {return new Symbol(sym.Metodo_imprimir, yychar, yyline, yytext());}
+\"      {return new Symbol(sym.Comillas, yychar, yyline, yytext());}
 
-{L}({L}|{D})* {tipo=yytext(); return new Symbol(sym.IDENTIFICADOR, yychar, yyline, yytext());} 
-("(-"{D}+")") | {D}+ {tipo=yytext(); return new Symbol(sym.VALOR_NUMERICO, yychar, yyline, yytext());} 
+{L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());} 
+("(-"{D}+")") | {D}+ {return new Symbol(sym.Valor_numerico, yychar, yyline, yytext());} 
 
-. {return new Symbol(sym.ERROR, yychar, yyline, yytext());} 
+. {return new Symbol(sym.Error, yychar, yyline, yytext());} 
 
 
 

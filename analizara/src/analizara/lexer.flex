@@ -8,7 +8,7 @@ import static analizara.Token.*;
 
 L=[a-zA-Z_]
 D=[0-9]
-WHITE=[ ,\t,\r]
+WHITE=[ \t\r]
 %{
 public String tipo;
 %}
@@ -49,38 +49,39 @@ falso {tipo=yytext(); return Falso;}
 
 {WHITE} {/*Ignore*/}
 "//".* {/*Ignore*/}
-")"     {return PARENTESIS_DER;} 
-"("     {return PARENTESIS_IZQ;} 
-"="     {return ASIGNAR;} 
-"=="    {return IGUAL;} 
-"+"     {return SUMA;} 
-"-"     {return RESTA;} 
-"*"     {return MULTIPLICACION;} 
-"/"     {return DIVISION;} 
-"^"     {return POTENCIA;} 
-"%"     {return MODULO;} 
-";"     {return PUNTO_COMA;} 
-"<="    {return MENOR_IGUAL;} 
-">="    {return MAYOR_IGUAL;} 
-"<"     {return MENOR;} 
-">"     {return MAYOR;} 
-"{"     {return LLAVE_IZQ;} 
-"}"     {return LLAVE_DER;} 
-"["     {return CORCHETE_IZQ;} 
-"]"     {return CORCHETE_DER;} 
-","     {return COMA;} 
-"."     {return PUNTO;}
-":"     {return DOS_PUNTOS;} 
-"'"     {return COMILLA_SIMPLE;}
-"!="    {return DIFERENTE;}
-"imprimir"  {return METODO_IMPRIMIR;}
-"\n"    {return Linea;}
+")"     {tipo=yytext(); return Parentesis_der;} 
+"("     {tipo=yytext(); return Parentesis_izq;} 
+"="     {tipo=yytext(); return Asignar;} 
+"=="    {tipo=yytext(); return Igual;} 
+"+"     {tipo=yytext(); return Suma;} 
+"-"     {tipo=yytext(); return Resta;} 
+"*"     {tipo=yytext(); return Multiplicacion;} 
+"/"     {tipo=yytext(); return Division;} 
+"^"     {tipo=yytext(); return Potencia;} 
+"%"     {tipo=yytext(); return Modulo;} 
+";"     {tipo=yytext(); return Punto_coma;} 
+"<="    {tipo=yytext(); return Menor_igual;} 
+">="    {tipo=yytext(); return Mayor_igual;} 
+"<"     {tipo=yytext(); return Menor;} 
+">"     {tipo=yytext(); return Mayor;} 
+"{"     {tipo=yytext(); return Llave_izq;} 
+"}"     {tipo=yytext(); return Llave_der;} 
+"["     {tipo=yytext(); return Corchete_izq;} 
+"]"     {tipo=yytext(); return Corchete_der;} 
+","     {tipo=yytext(); return Coma;} 
+"."     {tipo=yytext(); return Punto;}
+":"     {tipo=yytext(); return Dos_puntos;} 
+"'"     {tipo=yytext(); return Comilla_simple;}
+"!="    {tipo=yytext(); return Diferente;}
+"imprimir"  {tipo=yytext(); return Metodo_imprimir;}
+"\n"    {tipo=yytext(); return Linea;}
+\"      {tipo=yytext(); return Comillas;}
 
 
-{L}({L}|{D})* {tipo=yytext(); return IDENTIFICADOR;} 
-("(-"{D}+")") | {D}+ {tipo=yytext(); return VALOR_NUMERICO;} 
+{L}({L}|{D})* {tipo=yytext(); return Identificador;} 
+("(-"{D}+")") | {D}+ {tipo=yytext(); return Valor_numerico;} 
 
-. {return ERROR;} 
+. {return Error;} 
 
 
 
