@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/danielyeraynogueziniestra/Desktop/Automatas/compilador/analizara/src/analizara/Database.java</file>
-            <file>file:/Users/danielyeraynogueziniestra/Desktop/Automatas/compilador/analizara/src/analizara/main.java</file>
-            <file>file:/Users/danielyeraynogueziniestra/Desktop/Automatas/compilador/analizara/src/analizara/register.java</file>
-            <file>file:/Users/danielyeraynogueziniestra/Desktop/Automatas/compilador/analizara/src/analizara/UserRepository.java</file>
-            <file>file:/Users/danielyeraynogueziniestra/Desktop/Automatas/compilador/analizara/src/analizara/PasswordUtils.java</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/Analizara.java</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/Lexer.java</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/Token.java</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/LexerCup.flex</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/Sintax.cup</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/PasswordUtils.java</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/lexer.flex</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/interfaz.java</file>
+            <file>file:/C:/Users/PAKO031147/Desktop/compilador/analizara/src/analizara/LexerCup.java</file>
         </group>
     </open-files>
 </project-private>

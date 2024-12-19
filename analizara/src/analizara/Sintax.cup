@@ -15,4 +15,17 @@ parser code
     }
 :};
 
-terminal Publico, 
+terminal Falso, Parentesis_der, Parentesis_izq, Asignar, Igual, Suma, Resta,
+         Multiplicacion, Division, Potencia, Modulo, Punto_coma, Menor_igual, Mayor_igual, Menor,Mayor,
+         Llave_izq, Llave_der, Corchete_izq, Corchete_der, Coma, Punto, Dos_puntos, Comilla_simple,
+         Diferente, Metodo_imprimir, Identificador, Valor_numerico, Error, Linea, Privado, Publico,
+         Protegido, Cadena, Caracter, Entero, Doble, Flotante, Booleano, Si, Mientras, Estatico,
+         Opcion, Caso, Break, Hacer, Clase, Retorno, Vacio, Nulo, Nuevo, Extiende, Implementa,
+         Interface,Intentar,Capturar,De_otro_modo,Importar,Y,O, Verdadero, Comillas;
+non terminal INICIO, SENTENCIA, DECLARACION;
+
+start with INICIO;
+
+INICIO ::= Publico Clase Identificador Llave_izq SENTENCIA Llave_der;  
+
+SENTENCIA ::= Publico Entero Identificador Punto_coma | Privado Entero Identificador Punto_coma;
