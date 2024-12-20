@@ -4,9 +4,7 @@
  */
 package analizara;
 
-import static analizara.Token.ERROR;
-import static analizara.Token.IDENTIFICADOR;
-import static analizara.Token.VALOR_NUMERICO;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,8 +13,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_cup.runtime.Symbol;
 import javax.swing.ImageIcon;
 
 /**
@@ -73,17 +73,23 @@ public class interfaz extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         closeWBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Expresion a evaluar");
 
-        jLabel2.setText("Resultado");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Analisis Sintactico");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Analizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +101,7 @@ public class interfaz extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,30 +121,41 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
 
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Analisis Lexico");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(closeWBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(closeWBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
@@ -145,19 +163,23 @@ public class interfaz extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel3))
                     .addComponent(closeWBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(logoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
 
         pack();
@@ -167,6 +189,7 @@ public class interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
                 try{
             probarLexer();
+            probarSintax();
         }catch(IOException ex){
             Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null,ex);
         }
@@ -245,34 +268,52 @@ public class interfaz extends javax.swing.JFrame {
         
         Reader reader = new BufferedReader (new FileReader("fichero.txt"));
         Lexer lexer = new Lexer (reader);
-        String resultado = "";
+        int cont = 1;
+        String resultado = "LINEA --> " + cont + "\t\tSIMBOLO\n";
         
         while(true){
             Token token = lexer.yylex();
             if(token==null){
-                resultado = resultado + "FIN";
+                resultado += "FIN";
                 jTextArea1.setText(resultado);
                 return;
             }
             
             switch(token){
-                case ERROR:
-                    resultado = resultado + "ERROR TOKEN NO ENCONTRADO\n";
+                case Error:
+                    resultado += "ERROR TOKEN NO ENCONTRADO\n";
                     break;
-                case IDENTIFICADOR:
-                    
-                case VALOR_NUMERICO:
-                    resultado = resultado + "TOKEN: "+ token +" "+ lexer.tipo+"\n";
+                case Linea:
+                    cont++;
+                    resultado += "LINEA --> " + cont +"\n";
                     break;
-                case RESERVADAS:
-                    resultado = resultado + "TOKEN: "+ token +" "+ lexer.tipo+"\n";
+                case Identificador:
+                case Valor_numerico: 
+                    resultado += "TOKEN --> "+ token +"\t"+ lexer.tipo+ "\n";
                     break;
                 
                 default:
-                    resultado = resultado + "TOKEN: "+ token + "\n";
+                    resultado += "TOKEN --> "+ token +"\t"+ lexer.tipo+ "\n";
                     break;
             }
         }
+    }
+    public void probarSintax(){
+        String ST = jTextArea2.getText();
+        Sintax s = new Sintax(new analizara.LexerCup(new StringReader(ST)));
+        
+        try {
+            s.parse();
+            jTextArea3.setText("Analisis realizado correctamente");
+            jTextArea3.setForeground(new Color(25, 111, 61));
+        } catch (Exception ex) {
+            Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            Symbol sym = s.getS();
+             jTextArea3.setText("Error de sintaxis: Linea --> " + (sym.right + 1) + "Columna --> "
+                     + (sym.left + 1 + ", Texto : \"" + sym.value + "\""));
+            jTextArea3.setForeground(Color.red);
+        }
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -281,10 +322,13 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JButton logoutBtn;
     // End of variables declaration//GEN-END:variables
 }
