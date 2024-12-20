@@ -17,7 +17,7 @@ public class Analizara {
         "-parser", "Sintax", basePath + "/src/analizara/Sintax.cup"
         }; 
 
-        generar(path, path2, pathS);
+        generar(path, path2, pathS);    
     }
 
     public static void generar(String path, String path2, String[] pathS) throws IOException, Exception {

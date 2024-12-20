@@ -66,6 +66,7 @@ public enum Token{
     Y,
     O,
     Verdadero,
-    Comillas
+    Comillas,
+    Final
     
 }

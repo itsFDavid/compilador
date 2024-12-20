@@ -3,7 +3,7 @@ package analizara;
 import java_cup.runtime.Symbol;
 
 parser code
-{:
+{: 
     private Symbol s;
     
     public void syntax_error(Symbol s){
@@ -16,16 +16,146 @@ parser code
 :};
 
 terminal Falso, Parentesis_der, Parentesis_izq, Asignar, Igual, Suma, Resta,
-         Multiplicacion, Division, Potencia, Modulo, Punto_coma, Menor_igual, Mayor_igual, Menor,Mayor,
-         Llave_izq, Llave_der, Corchete_izq, Corchete_der, Coma, Punto, Dos_puntos, Comilla_simple,
-         Diferente, Metodo_imprimir, Identificador, Valor_numerico, Error, Linea, Privado, Publico,
-         Protegido, Cadena, Caracter, Entero, Doble, Flotante, Booleano, Si, Mientras, Estatico,
-         Opcion, Caso, Break, Hacer, Clase, Retorno, Vacio, Nulo, Nuevo, Extiende, Implementa,
-         Interface,Intentar,Capturar,De_otro_modo,Importar,Y,O, Verdadero, Comillas;
-non terminal INICIO, SENTENCIA, DECLARACION;
+    Multiplicacion, Division, Potencia, Modulo, Punto_coma, Menor_igual, Mayor_igual,
+    Menor, Mayor, Llave_izq, Llave_der, Coma, Punto, Diferente, Identificador,
+    Valor_numerico, Privado, Publico, Protegido, Cadena, Caracter,
+    Entero, Doble, Flotante, Booleano, Clase, Vacio, Extiende, Implementa,
+    Y, O, Verdadero, Si, Sino, Mientras, Hacer, Para, Break, Continuar, Retorno,
+    Intentar, Capturar, Finalmente, Opcion, Caso, Dos_puntos, De_otro_modo;
 
-start with INICIO;
+non terminal PROGRAMA, CLASE, BLOQUE, LISTA_INSTRUCCIONES, INSTRUCCION,
+    EXTIENDE_IMPLEMENTA, DECLARACION_VARIABLE, DECLARACION_METODO,
+    ASIGNACION, EXPRESION, CONSTRUCTOR, TIPO_VARIABLE, TIPO_RETORNO, 
+    LISTA_PARAMETROS, DECLARACION_PARAMETROS, SENTENCIA_IF, SENTENCIA_WHILE,
+    SENTENCIA_DO_WHILE, SENTENCIA_FOR, SENTENCIA_OPCION, LISTA_CASOS,
+    CASO, SENTENCIA_TRY, SENTENCIA_BREAK, SENTENCIA_CONTINUE, SENTENCIA_RETURN,
+    BLOQUE_CATCH, BLOQUE_FINALLY, MODIFICADOR;
 
-INICIO ::= Publico Clase Identificador Llave_izq SENTENCIA Llave_der;  
+// Definición de precedencia
+precedence left O;
+precedence left Y;
+precedence left Igual, Diferente;
+precedence left Menor, Mayor, Menor_igual, Mayor_igual;
+precedence left Suma, Resta;
+precedence left Multiplicacion, Division, Modulo;
+precedence right Potencia;
+precedence right Asignar;
 
-SENTENCIA ::= Publico Entero Identificador Punto_coma | Privado Entero Identificador Punto_coma;
+start with PROGRAMA;
+
+PROGRAMA ::= CLASE;  
+
+CLASE ::= Publico Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
+    | Privado Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
+    | Protegido Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
+    | Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der;
+
+EXTIENDE_IMPLEMENTA ::= Extiende Identificador
+    | Implementa Identificador
+    | Extiende Identificador Implementa Identificador
+    | /* vacío */;
+
+BLOQUE ::= LISTA_INSTRUCCIONES;
+
+LISTA_INSTRUCCIONES ::= INSTRUCCION LISTA_INSTRUCCIONES
+    | /* vacío */;
+
+INSTRUCCION ::= DECLARACION_VARIABLE
+    | DECLARACION_METODO
+    | ASIGNACION
+    | CONSTRUCTOR
+    | SENTENCIA_IF
+    | SENTENCIA_WHILE
+    | SENTENCIA_DO_WHILE
+    | SENTENCIA_FOR
+    | SENTENCIA_OPCION
+    | SENTENCIA_TRY
+    | SENTENCIA_BREAK
+    | SENTENCIA_CONTINUE
+    | SENTENCIA_RETURN;
+
+// Estructuras de control
+SENTENCIA_IF ::= Si Parentesis_izq EXPRESION Parentesis_der Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Si Parentesis_izq EXPRESION Parentesis_der Llave_izq LISTA_INSTRUCCIONES Llave_der 
+      Sino Llave_izq LISTA_INSTRUCCIONES Llave_der;
+
+SENTENCIA_WHILE ::= Mientras Parentesis_izq EXPRESION Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der;
+
+SENTENCIA_DO_WHILE ::= Hacer Llave_izq LISTA_INSTRUCCIONES Llave_der 
+    Mientras Parentesis_izq EXPRESION Parentesis_der Punto_coma;
+
+SENTENCIA_FOR ::= Para Parentesis_izq DECLARACION_VARIABLE EXPRESION Punto_coma ASIGNACION Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der;
+
+SENTENCIA_OPCION ::= Opcion Parentesis_izq EXPRESION Parentesis_der Llave_izq 
+    LISTA_CASOS De_otro_modo Dos_puntos LISTA_INSTRUCCIONES Llave_der;
+
+LISTA_CASOS ::= CASO LISTA_CASOS
+    | CASO;
+
+CASO ::= Caso EXPRESION Dos_puntos LISTA_INSTRUCCIONES;
+
+SENTENCIA_TRY ::= Intentar Llave_izq LISTA_INSTRUCCIONES Llave_der BLOQUE_CATCH
+    | Intentar Llave_izq LISTA_INSTRUCCIONES Llave_der BLOQUE_CATCH BLOQUE_FINALLY;
+
+BLOQUE_CATCH ::= Capturar Parentesis_izq TIPO_VARIABLE Identificador Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der;
+
+BLOQUE_FINALLY ::= Finalmente Llave_izq LISTA_INSTRUCCIONES Llave_der;
+
+SENTENCIA_BREAK ::= Break Punto_coma;
+
+SENTENCIA_CONTINUE ::= Continuar Punto_coma;
+
+SENTENCIA_RETURN ::= Retorno EXPRESION Punto_coma
+    | Retorno Punto_coma;
+
+CONSTRUCTOR ::= Identificador Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der;
+
+LISTA_PARAMETROS ::= DECLARACION_PARAMETROS Coma LISTA_PARAMETROS
+    | DECLARACION_PARAMETROS
+    | /* vacío */;
+
+DECLARACION_VARIABLE ::= TIPO_VARIABLE Identificador Punto_coma 
+    | TIPO_VARIABLE Identificador Asignar EXPRESION Punto_coma;
+
+DECLARACION_PARAMETROS ::= TIPO_VARIABLE Identificador
+    | TIPO_VARIABLE Identificador Asignar EXPRESION;
+
+TIPO_VARIABLE ::= Cadena
+    | Entero
+    | Doble
+    | Flotante
+    | Booleano
+    | Caracter;
+
+TIPO_RETORNO ::= TIPO_VARIABLE
+    | Vacio;
+
+DECLARACION_METODO ::= MODIFICADOR TIPO_RETORNO Identificador Parentesis_izq LISTA_PARAMETROS Parentesis_der Llave_izq LISTA_INSTRUCCIONES Llave_der;
+
+MODIFICADOR ::= Publico | Privado | Protegido | /* vacío */;
+
+ASIGNACION ::= Identificador Asignar EXPRESION Punto_coma;
+
+EXPRESION ::= Identificador 
+    | Valor_numerico 
+    | Verdadero
+    | Falso
+    | EXPRESION Suma EXPRESION 
+    | EXPRESION Resta EXPRESION
+    | EXPRESION Multiplicacion EXPRESION
+    | EXPRESION Division EXPRESION
+    | EXPRESION Modulo EXPRESION
+    | EXPRESION Potencia EXPRESION
+    | EXPRESION Mayor EXPRESION
+    | EXPRESION Menor EXPRESION
+    | EXPRESION Mayor_igual EXPRESION
+    | EXPRESION Menor_igual EXPRESION
+    | EXPRESION Igual EXPRESION
+    | EXPRESION Diferente EXPRESION
+    | EXPRESION Y EXPRESION
+    | EXPRESION O EXPRESION
+    | Parentesis_izq EXPRESION Parentesis_der;

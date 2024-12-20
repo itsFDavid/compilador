@@ -56,6 +56,7 @@ y {return new Symbol(sym.Y, yychar, yyline, yytext());}
 o {return new Symbol(sym.O, yychar, yyline, yytext());}
 verdadero {return new Symbol(sym.Verdadero, yychar, yyline, yytext());}
 falso {return new Symbol(sym.Falso, yychar, yyline, yytext());}
+final {return new Symbol(sym.Final_2, yychar, yyline, yytext());}
 
 {WHITE} {/*Ignore*/}
 "//".* {/*Ignore*/}

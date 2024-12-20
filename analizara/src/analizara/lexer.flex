@@ -46,6 +46,7 @@ y {tipo=yytext(); return Y;}
 o {tipo=yytext(); return O;}
 verdadero {tipo=yytext(); return Verdadero;}
 falso {tipo=yytext(); return Falso;}
+final {tipo=yytext(); return Final_2;}
 
 {WHITE} {/*Ignore*/}
 "//".* {/*Ignore*/}
