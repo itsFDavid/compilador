@@ -15,23 +15,100 @@ parser code
     }
 :};
 
-terminal Falso, Parentesis_der, Parentesis_izq, Asignar, Igual, Suma, Resta,
-    Multiplicacion, Division, Potencia, Modulo, Punto_coma, Menor_igual, Mayor_igual,
-    Menor, Mayor, Llave_izq, Llave_der, Coma, Punto, Diferente, Identificador,
-    Valor_numerico, Privado, Publico, Protegido, Cadena, Caracter,
-    Entero, Doble, Flotante, Booleano, Clase, Vacio, Extiende, Implementa,
-    Y, O, Verdadero, Si, Sino, Mientras, Hacer, Para, Break, Continuar, Retorno,
-    Intentar, Capturar, Finalmente, Opcion, Caso, Dos_puntos, De_otro_modo;
+/* Terminales */
+terminal 
+    /* Palabras reservadas */
+    Clase, 
+    Publico, 
+    Privado, 
+    Protegido,
+    Extiende, 
+    Implementa,
+    Si, 
+    Sino, 
+    Mientras, 
+    Hacer, 
+    Para,
+    Intentar, 
+    Capturar, 
+    Finalmente,
+    Break, 
+    Continuar, 
+    Retorno,
+    Opcion, 
+    Caso, 
+    De_otro_modo,
+    
+    /* Tipos de datos */
+    Entero, 
+    Doble, 
+    Flotante, 
+    Booleano, 
+    Cadena, 
+    Caracter, 
+    Vacio,
+    
+    /* Valores booleanos */
+    Verdadero, 
+    Falso,
+    
+    /* Operadores */
+    Suma, 
+    Resta, 
+    Multiplicacion, 
+    Division, 
+    Modulo, 
+    Potencia,
+    Mayor, 
+    Menor, 
+    Mayor_igual, 
+    Menor_igual, 
+    Igual, 
+    Diferente,
+    Y, 
+    O, 
+    Asignar,
+    
+    /* Símbolos */
+    Parentesis_izq, 
+    Parentesis_der,
+    Llave_izq, 
+    Llave_der,
+    Punto_coma, 
+    Coma, 
+    Punto, 
+    Dos_puntos,
+    
+    /* Otros */
+    Identificador, 
+    Valor_numerico;
 
-non terminal PROGRAMA, CLASE, BLOQUE, LISTA_INSTRUCCIONES, INSTRUCCION,
-    EXTIENDE_IMPLEMENTA, DECLARACION_VARIABLE, DECLARACION_METODO,
-    ASIGNACION, EXPRESION, CONSTRUCTOR, TIPO_VARIABLE, TIPO_RETORNO, 
-    LISTA_PARAMETROS, DECLARACION_PARAMETROS, SENTENCIA_IF, SENTENCIA_WHILE,
-    SENTENCIA_DO_WHILE, SENTENCIA_FOR, SENTENCIA_OPCION, LISTA_CASOS,
-    CASO, SENTENCIA_TRY, SENTENCIA_BREAK, SENTENCIA_CONTINUE, SENTENCIA_RETURN,
-    BLOQUE_CATCH, BLOQUE_FINALLY, MODIFICADOR;
+/* No terminales */
+non terminal 
+    PROGRAMA,
+    LISTA_INSTRUCCIONES, 
+    INSTRUCCION,
+    DECLARACION, 
+    DECLARACION_VARIABLE, 
+    DECLARACION_METODO,
+    TIPO_DATO, 
+    MODIFICADOR_CLASE,
+    LISTA_PARAMETROS, 
+    PARAMETRO,
+    EXPRESION, 
+    TERMINO, 
+    FACTOR,
+    SENTENCIA_CONTROL, 
+    SENTENCIA_IF, 
+    SENTENCIA_WHILE, 
+    SENTENCIA_DO_WHILE, 
+    SENTENCIA_FOR,
+    SENTENCIA_OPCION, 
+    CASOS, 
+    CASO;
 
-// Definición de precedencia
+/* Precedencia y asociatividad */
+precedence left Identificador;
 precedence left O;
 precedence left Y;
 precedence left Igual, Diferente;
@@ -41,121 +118,261 @@ precedence left Multiplicacion, Division, Modulo;
 precedence right Potencia;
 precedence right Asignar;
 
+/* Regla inicial */
 start with PROGRAMA;
 
-PROGRAMA ::= CLASE;  
+/* Reglas de producción */
+PROGRAMA ::= 
+    MODIFICADOR_CLASE Clase Identificador Llave_izq LISTA_INSTRUCCIONES Llave_der;
 
-CLASE ::= Publico Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
-    | Privado Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
-    | Protegido Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
-    | Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der;
-
-EXTIENDE_IMPLEMENTA ::= Extiende Identificador
-    | Implementa Identificador
-    | Extiende Identificador Implementa Identificador
+MODIFICADOR_CLASE ::= 
+    Publico 
     | /* vacío */;
 
-BLOQUE ::= LISTA_INSTRUCCIONES;
+TIPO_DATO ::= 
+    Entero 
+    | Doble 
+    | Flotante 
+    | Booleano 
+    | Cadena 
+    | Caracter 
+    | Vacio;
 
-LISTA_INSTRUCCIONES ::= INSTRUCCION LISTA_INSTRUCCIONES
+LISTA_INSTRUCCIONES ::= 
+    INSTRUCCION LISTA_INSTRUCCIONES 
     | /* vacío */;
 
-INSTRUCCION ::= DECLARACION_VARIABLE
-    | DECLARACION_METODO
-    | ASIGNACION
-    | CONSTRUCTOR
-    | SENTENCIA_IF
+INSTRUCCION ::= 
+    DECLARACION
+    | SENTENCIA_CONTROL
+    | Identificador Asignar EXPRESION Punto_coma
+    | Retorno EXPRESION Punto_coma
+    | Retorno Punto_coma
+    | Break Punto_coma
+    | Continuar Punto_coma;
+
+DECLARACION ::=
+    DECLARACION_VARIABLE
+    | DECLARACION_METODO;
+
+DECLARACION_VARIABLE ::=
+    /* Variables públicas */
+    Publico Entero Identificador Punto_coma
+    | Publico Entero Identificador Asignar EXPRESION Punto_coma
+    | Publico Cadena Identificador Punto_coma
+    | Publico Cadena Identificador Asignar EXPRESION Punto_coma
+    | Publico Doble Identificador Punto_coma
+    | Publico Doble Identificador Asignar EXPRESION Punto_coma
+    | Publico Flotante Identificador Punto_coma
+    | Publico Flotante Identificador Asignar EXPRESION Punto_coma
+    | Publico Booleano Identificador Punto_coma
+    | Publico Booleano Identificador Asignar EXPRESION Punto_coma
+    | Publico Caracter Identificador Punto_coma
+    | Publico Caracter Identificador Asignar EXPRESION Punto_coma
+
+    /* Variables privadas */
+    | Privado Entero Identificador Punto_coma
+    | Privado Entero Identificador Asignar EXPRESION Punto_coma
+    | Privado Cadena Identificador Punto_coma
+    | Privado Cadena Identificador Asignar EXPRESION Punto_coma
+    | Privado Doble Identificador Punto_coma
+    | Privado Doble Identificador Asignar EXPRESION Punto_coma
+    | Privado Flotante Identificador Punto_coma
+    | Privado Flotante Identificador Asignar EXPRESION Punto_coma
+    | Privado Booleano Identificador Punto_coma
+    | Privado Booleano Identificador Asignar EXPRESION Punto_coma
+    | Privado Caracter Identificador Punto_coma
+    | Privado Caracter Identificador Asignar EXPRESION Punto_coma
+
+    /* Variables protegidas */
+    | Protegido Entero Identificador Punto_coma
+    | Protegido Entero Identificador Asignar EXPRESION Punto_coma
+    | Protegido Cadena Identificador Punto_coma
+    | Protegido Cadena Identificador Asignar EXPRESION Punto_coma
+    | Protegido Doble Identificador Punto_coma
+    | Protegido Doble Identificador Asignar EXPRESION Punto_coma
+    | Protegido Flotante Identificador Punto_coma
+    | Protegido Flotante Identificador Asignar EXPRESION Punto_coma
+    | Protegido Booleano Identificador Punto_coma
+    | Protegido Booleano Identificador Asignar EXPRESION Punto_coma
+    | Protegido Caracter Identificador Punto_coma
+    | Protegido Caracter Identificador Asignar EXPRESION Punto_coma
+
+    /* Variables sin modificador de acceso */
+    | Entero Identificador Punto_coma
+    | Entero Identificador Asignar EXPRESION Punto_coma
+    | Cadena Identificador Punto_coma
+    | Cadena Identificador Asignar EXPRESION Punto_coma
+    | Doble Identificador Punto_coma
+    | Doble Identificador Asignar EXPRESION Punto_coma
+    | Flotante Identificador Punto_coma
+    | Flotante Identificador Asignar EXPRESION Punto_coma
+    | Booleano Identificador Punto_coma
+    | Booleano Identificador Asignar EXPRESION Punto_coma
+    | Caracter Identificador Punto_coma
+    | Caracter Identificador Asignar EXPRESION Punto_coma;
+
+DECLARACION_METODO ::=
+    /* Métodos públicos */
+    Publico Cadena Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Publico Entero Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Publico Doble Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Publico Flotante Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Publico Booleano Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Publico Caracter Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Publico Vacio Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+
+    /* Métodos privados */
+    | Privado Cadena Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Privado Entero Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Privado Doble Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Privado Flotante Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Privado Booleano Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Privado Caracter Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Privado Vacio Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+
+    /* Métodos protegidos */
+    | Protegido Cadena Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Protegido Entero Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Protegido Doble Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Protegido Flotante Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Protegido Booleano Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Protegido Caracter Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Protegido Vacio Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+
+    /* Métodos sin modificador de acceso */
+    | Cadena Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Entero Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Doble Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Flotante Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Booleano Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Caracter Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Vacio Identificador 
+    Parentesis_izq LISTA_PARAMETROS Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der;
+
+LISTA_PARAMETROS ::=
+    PARAMETRO Coma LISTA_PARAMETROS
+    | PARAMETRO
+    | /* vacío */;
+
+PARAMETRO ::=
+    TIPO_DATO Identificador;
+
+EXPRESION ::=
+    TERMINO
+    | EXPRESION Suma TERMINO
+    | EXPRESION Resta TERMINO
+    | EXPRESION Y TERMINO
+    | EXPRESION O TERMINO
+    | EXPRESION Igual TERMINO
+    | EXPRESION Diferente TERMINO
+    | EXPRESION Menor TERMINO
+    | EXPRESION Mayor TERMINO
+    | EXPRESION Menor_igual TERMINO
+    | EXPRESION Mayor_igual TERMINO;
+
+TERMINO ::=
+    FACTOR
+    | TERMINO Multiplicacion FACTOR
+    | TERMINO Division FACTOR
+    | TERMINO Modulo FACTOR
+    | TERMINO Potencia FACTOR;
+
+FACTOR ::=
+    Identificador
+    | Valor_numerico
+    | Verdadero
+    | Falso
+    | Parentesis_izq EXPRESION Parentesis_der;
+
+SENTENCIA_CONTROL ::=
+    SENTENCIA_IF
     | SENTENCIA_WHILE
     | SENTENCIA_DO_WHILE
     | SENTENCIA_FOR
-    | SENTENCIA_OPCION
-    | SENTENCIA_TRY
-    | SENTENCIA_BREAK
-    | SENTENCIA_CONTINUE
-    | SENTENCIA_RETURN;
+    | SENTENCIA_OPCION;
 
-// Estructuras de control
-SENTENCIA_IF ::= Si Parentesis_izq EXPRESION Parentesis_der Llave_izq LISTA_INSTRUCCIONES Llave_der
-    | Si Parentesis_izq EXPRESION Parentesis_der Llave_izq LISTA_INSTRUCCIONES Llave_der 
-      Sino Llave_izq LISTA_INSTRUCCIONES Llave_der;
+SENTENCIA_IF ::=
+    Si Parentesis_izq EXPRESION Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    | Si Parentesis_izq EXPRESION Parentesis_der 
+    Llave_izq LISTA_INSTRUCCIONES Llave_der
+    Sino Llave_izq LISTA_INSTRUCCIONES Llave_der;
 
-SENTENCIA_WHILE ::= Mientras Parentesis_izq EXPRESION Parentesis_der 
+SENTENCIA_WHILE ::=
+    Mientras Parentesis_izq EXPRESION Parentesis_der
     Llave_izq LISTA_INSTRUCCIONES Llave_der;
 
-SENTENCIA_DO_WHILE ::= Hacer Llave_izq LISTA_INSTRUCCIONES Llave_der 
+SENTENCIA_DO_WHILE ::=
+    Hacer Llave_izq LISTA_INSTRUCCIONES Llave_der
     Mientras Parentesis_izq EXPRESION Parentesis_der Punto_coma;
 
-SENTENCIA_FOR ::= Para Parentesis_izq DECLARACION_VARIABLE EXPRESION Punto_coma ASIGNACION Parentesis_der 
-    Llave_izq LISTA_INSTRUCCIONES Llave_der;
+SENTENCIA_FOR ::=
+    Para Parentesis_izq 
+    DECLARACION_VARIABLE EXPRESION Punto_coma Identificador Asignar EXPRESION
+    Parentesis_der Llave_izq LISTA_INSTRUCCIONES Llave_der;
 
-SENTENCIA_OPCION ::= Opcion Parentesis_izq EXPRESION Parentesis_der Llave_izq 
-    LISTA_CASOS De_otro_modo Dos_puntos LISTA_INSTRUCCIONES Llave_der;
+SENTENCIA_OPCION ::=
+    Opcion Parentesis_izq EXPRESION Parentesis_der
+    Llave_izq CASOS De_otro_modo Dos_puntos LISTA_INSTRUCCIONES Llave_der;
 
-LISTA_CASOS ::= CASO LISTA_CASOS
+CASOS ::=
+    CASO CASOS
     | CASO;
 
 CASO ::= Caso EXPRESION Dos_puntos LISTA_INSTRUCCIONES;
-
-SENTENCIA_TRY ::= Intentar Llave_izq LISTA_INSTRUCCIONES Llave_der BLOQUE_CATCH
-    | Intentar Llave_izq LISTA_INSTRUCCIONES Llave_der BLOQUE_CATCH BLOQUE_FINALLY;
-
-BLOQUE_CATCH ::= Capturar Parentesis_izq TIPO_VARIABLE Identificador Parentesis_der 
-    Llave_izq LISTA_INSTRUCCIONES Llave_der;
-
-BLOQUE_FINALLY ::= Finalmente Llave_izq LISTA_INSTRUCCIONES Llave_der;
-
-SENTENCIA_BREAK ::= Break Punto_coma;
-
-SENTENCIA_CONTINUE ::= Continuar Punto_coma;
-
-SENTENCIA_RETURN ::= Retorno EXPRESION Punto_coma
-    | Retorno Punto_coma;
-
-CONSTRUCTOR ::= Identificador Parentesis_izq LISTA_PARAMETROS Parentesis_der 
-    Llave_izq LISTA_INSTRUCCIONES Llave_der;
-
-LISTA_PARAMETROS ::= DECLARACION_PARAMETROS Coma LISTA_PARAMETROS
-    | DECLARACION_PARAMETROS
-    | /* vacío */;
-
-DECLARACION_VARIABLE ::= TIPO_VARIABLE Identificador Punto_coma 
-    | TIPO_VARIABLE Identificador Asignar EXPRESION Punto_coma;
-
-DECLARACION_PARAMETROS ::= TIPO_VARIABLE Identificador
-    | TIPO_VARIABLE Identificador Asignar EXPRESION;
-
-TIPO_VARIABLE ::= Cadena
-    | Entero
-    | Doble
-    | Flotante
-    | Booleano
-    | Caracter;
-
-TIPO_RETORNO ::= TIPO_VARIABLE
-    | Vacio;
-
-DECLARACION_METODO ::= MODIFICADOR TIPO_RETORNO Identificador Parentesis_izq LISTA_PARAMETROS Parentesis_der Llave_izq LISTA_INSTRUCCIONES Llave_der;
-
-MODIFICADOR ::= Publico | Privado | Protegido | /* vacío */;
-
-ASIGNACION ::= Identificador Asignar EXPRESION Punto_coma;
-
-EXPRESION ::= Identificador 
-    | Valor_numerico 
-    | Verdadero
-    | Falso
-    | EXPRESION Suma EXPRESION 
-    | EXPRESION Resta EXPRESION
-    | EXPRESION Multiplicacion EXPRESION
-    | EXPRESION Division EXPRESION
-    | EXPRESION Modulo EXPRESION
-    | EXPRESION Potencia EXPRESION
-    | EXPRESION Mayor EXPRESION
-    | EXPRESION Menor EXPRESION
-    | EXPRESION Mayor_igual EXPRESION
-    | EXPRESION Menor_igual EXPRESION
-    | EXPRESION Igual EXPRESION
-    | EXPRESION Diferente EXPRESION
-    | EXPRESION Y EXPRESION
-    | EXPRESION O EXPRESION
-    | Parentesis_izq EXPRESION Parentesis_der;
