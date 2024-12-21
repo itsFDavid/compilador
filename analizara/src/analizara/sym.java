@@ -8,7 +8,10 @@ package analizara;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int Estatico = 66;
   public static final int Entero = 22;
+  public static final int Final_2 = 56;
+  public static final int Nulo = 61;
   public static final int Coma = 51;
   public static final int Y = 43;
   public static final int Intentar = 13;
@@ -17,12 +20,17 @@ public class sym {
   public static final int Diferente = 42;
   public static final int Potencia = 36;
   public static final int Clase = 2;
+  public static final int Metodo_imprimir = 65;
   public static final int Valor_numerico = 55;
+  public static final int Interface = 64;
   public static final int Menor = 38;
   public static final int Opcion = 19;
   public static final int Break = 16;
+  public static final int Error = 57;
   public static final int Parentesis_der = 47;
   public static final int Doble = 23;
+  public static final int Nuevo = 67;
+  public static final int Corchete_der = 60;
   public static final int Mayor = 37;
   public static final int Booleano = 25;
   public static final int Punto = 52;
@@ -44,6 +52,7 @@ public class sym {
   public static final int Capturar = 14;
   public static final int Caso = 20;
   public static final int Llave_der = 49;
+  public static final int Comilla_simple = 62;
   public static final int Menor_igual = 40;
   public static final int Privado = 4;
   public static final int Dos_puntos = 53;
@@ -59,11 +68,14 @@ public class sym {
   public static final int Mientras = 10;
   public static final int Extiende = 6;
   public static final int Parentesis_izq = 46;
+  public static final int Corchete_izq = 58;
   public static final int Multiplicacion = 33;
   public static final int Verdadero = 29;
   public static final int Retorno = 18;
+  public static final int Importar = 59;
   public static final int Suma = 31;
   public static final int Igual = 41;
+  public static final int Comillas = 63;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -120,7 +132,19 @@ public class sym {
   "Punto",
   "Dos_puntos",
   "Identificador",
-  "Valor_numerico"
+  "Valor_numerico",
+  "Final_2",
+  "Error",
+  "Corchete_izq",
+  "Importar",
+  "Corchete_der",
+  "Nulo",
+  "Comilla_simple",
+  "Comillas",
+  "Interface",
+  "Metodo_imprimir",
+  "Estatico",
+  "Nuevo"
   };
 }
 

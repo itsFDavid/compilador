@@ -81,11 +81,26 @@ terminal
     
     /* Otros */
     Identificador, 
-    Valor_numerico;
+    Valor_numerico,
+    Final_2,
+    Error,
+    Corchete_izq,
+    Importar,
+    Corchete_der,
+    Nulo,
+    Comilla_simple,
+    Comillas,
+    Interface,
+    Metodo_imprimir,
+    Estatico,
+    Nuevo;
 
 /* No terminales */
 non terminal 
     PROGRAMA,
+    CLASE,
+    BLOQUE,
+    EXTIENDE_IMPLEMENTA,
     LISTA_INSTRUCCIONES, 
     INSTRUCCION,
     DECLARACION, 
@@ -121,9 +136,19 @@ precedence right Asignar;
 /* Regla inicial */
 start with PROGRAMA;
 
-/* Reglas de producción */
-PROGRAMA ::= 
-    MODIFICADOR_CLASE Clase Identificador Llave_izq LISTA_INSTRUCCIONES Llave_der;
+PROGRAMA ::= CLASE;
+
+CLASE ::= Publico Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
+    | Privado Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
+    | Protegido Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
+    | Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der;
+
+EXTIENDE_IMPLEMENTA ::= Extiende Identificador
+    | Implementa Identificador
+    | Extiende Identificador Implementa Identificador
+    | /* vacío */;
+
+BLOQUE ::= LISTA_INSTRUCCIONES;
 
 MODIFICADOR_CLASE ::= 
     Publico 
