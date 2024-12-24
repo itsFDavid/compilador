@@ -16,7 +16,9 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_cup.runtime.DefaultSymbolFactory;
 import java_cup.runtime.Symbol;
+import java_cup.runtime.SymbolFactory;
 import javax.swing.ImageIcon;
 
 /**
@@ -300,7 +302,8 @@ public class interfaz extends javax.swing.JFrame {
     }
     public void probarSintax(){
         String ST = jTextArea2.getText();
-        Sintax s = new Sintax(new analizara.LexerCup(new StringReader(ST)));
+        LexerCup lexer = new LexerCup(new StringReader(ST)); 
+        Sintax s = new Sintax(lexer);
         
         try {
             s.parse();
