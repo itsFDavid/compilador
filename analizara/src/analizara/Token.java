@@ -45,6 +45,8 @@ public enum Token{
     Flotante,
     Booleano,
     Si,
+    Sino,
+    Hasta,
     Mientras,
     Estatico,
     Opcion,

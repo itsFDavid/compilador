@@ -17,13 +17,15 @@ public String tipo;
 publico {tipo=yytext(); return Publico;}
 privado {tipo=yytext(); return Privado;}
 protegido {tipo=yytext(); return Protegido;}
-cadena {tipo=yytext(); return Cadena;}
+Cadena {tipo=yytext(); return Cadena;}
 caracter {tipo=yytext(); return Caracter;}
 entero {tipo=yytext(); return Entero;}
 doble {tipo=yytext(); return Doble;}
 flotante {tipo=yytext(); return Flotante;}
 booleano {tipo=yytext(); return Booleano;}
 si {tipo=yytext(); return Si;}
+Sino {tipo=yytext(); return Sino;}
+hasta {tipo=yytext(); return Hasta;}
 mientras {tipo=yytext(); return Mientras;}
 opcion {tipo=yytext(); return Opcion;}
 caso {tipo=yytext(); return Caso;}

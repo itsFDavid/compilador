@@ -28,7 +28,7 @@ terminal
     Sino, 
     Mientras, 
     Hacer, 
-    Para,
+    Hasta,
     Intentar, 
     Capturar, 
     Finalmente,
@@ -122,16 +122,7 @@ non terminal
     CASOS, 
     CASO;
 
-/* Precedencia y asociatividad */
-precedence left Identificador;
-precedence left O;
-precedence left Y;
-precedence left Igual, Diferente;
-precedence left Menor, Mayor, Menor_igual, Mayor_igual;
-precedence left Suma, Resta;
-precedence left Multiplicacion, Division, Modulo;
-precedence right Potencia;
-precedence right Asignar;
+
 
 /* Regla inicial */
 start with PROGRAMA;
@@ -139,8 +130,6 @@ start with PROGRAMA;
 PROGRAMA ::= CLASE;
 
 CLASE ::= Publico Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
-    | Privado Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
-    | Protegido Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der
     | Clase Identificador EXTIENDE_IMPLEMENTA Llave_izq BLOQUE Llave_der;
 
 EXTIENDE_IMPLEMENTA ::= Extiende Identificador
@@ -150,9 +139,6 @@ EXTIENDE_IMPLEMENTA ::= Extiende Identificador
 
 BLOQUE ::= LISTA_INSTRUCCIONES;
 
-MODIFICADOR_CLASE ::= 
-    Publico 
-    | /* vacío */;
 
 TIPO_DATO ::= 
     Entero 
@@ -160,8 +146,7 @@ TIPO_DATO ::=
     | Flotante 
     | Booleano 
     | Cadena 
-    | Caracter 
-    | Vacio;
+    | Caracter;
 
 LISTA_INSTRUCCIONES ::= 
     INSTRUCCION LISTA_INSTRUCCIONES 
@@ -227,7 +212,8 @@ DECLARACION_VARIABLE ::=
     | Entero Identificador Punto_coma
     | Entero Identificador Asignar EXPRESION Punto_coma
     | Cadena Identificador Punto_coma
-    | Cadena Identificador Asignar EXPRESION Punto_coma
+    | Cadena Identificador Asignar Comillas Identificador Comillas Punto_coma
+    | Cadena Identificador Asignar Comillas Comillas Punto_coma
     | Doble Identificador Punto_coma
     | Doble Identificador Asignar EXPRESION Punto_coma
     | Flotante Identificador Punto_coma
@@ -388,7 +374,7 @@ SENTENCIA_DO_WHILE ::=
     Mientras Parentesis_izq EXPRESION Parentesis_der Punto_coma;
 
 SENTENCIA_FOR ::=
-    Para Parentesis_izq 
+    Hasta Parentesis_izq 
     DECLARACION_VARIABLE EXPRESION Punto_coma Identificador Asignar EXPRESION
     Parentesis_der Llave_izq LISTA_INSTRUCCIONES Llave_der;
 
