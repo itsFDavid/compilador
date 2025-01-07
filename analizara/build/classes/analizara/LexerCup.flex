@@ -27,13 +27,15 @@ WHITE=[ \t\r\n]
 publico {return new Symbol(sym.Publico, yychar, yyline, yytext());}
 privado {return new Symbol(sym.Privado, yychar, yyline, yytext());}
 protegido {return new Symbol(sym.Protegido, yychar, yyline, yytext());}
-cadena {return new Symbol(sym.Cadena, yychar, yyline, yytext());}
+Cadena {return new Symbol(sym.Cadena, yychar, yyline, yytext());}
 caracter {return new Symbol(sym.Caracter, yychar, yyline, yytext());}
 entero {return new Symbol(sym.Entero, yychar, yyline, yytext());}
 doble {return new Symbol(sym.Doble, yychar, yyline, yytext());}
 flotante {return new Symbol(sym.Flotante, yychar, yyline, yytext());}
 booleano {return new Symbol(sym.Booleano, yychar, yyline, yytext());}
 si {return new Symbol(sym.Si, yychar, yyline, yytext());}
+Sino {return new Symbol(sym.Sino, yychar, yyline, yytext());}
+hasta {return new Symbol(sym.Hasta, yychar, yyline, yytext());}
 mientras {return new Symbol(sym.Mientras, yychar, yyline, yytext());}
 opcion {return new Symbol(sym.Opcion, yychar, yyline, yytext());}
 caso {return new Symbol(sym.Caso, yychar, yyline, yytext());}
