@@ -1,0 +1,11 @@
+clase Main{
+flotante s = 0;
+Cadena s = "s";
+entero c = 2;
+booleano s = Falso;
+booleano s = Verdadero;
+
+caracter s = "s";
+
+
+}

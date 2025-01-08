@@ -61,6 +61,7 @@ public class Ayuda extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(760, 820));
@@ -116,6 +117,8 @@ public class Ayuda extends javax.swing.JFrame {
 
         jLabel7.setText("Francisco Daniel Gregorio Guevara");
 
+        jLabel8.setText("Daniel Yeray Noguez Iniestra");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,9 +139,11 @@ public class Ayuda extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(36, 36, 36)
-                                        .addComponent(jLabel7))))
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel8))))
                             .addComponent(jLabel5))
-                        .addContainerGap(321, Short.MAX_VALUE))
+                        .addContainerGap(137, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(sintaxis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -161,7 +166,8 @@ public class Ayuda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8))
                 .addContainerGap())
         );
 
@@ -218,6 +224,7 @@ public class Ayuda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel sintaxIcon;
     private java.awt.Panel sintaxis;
     // End of variables declaration//GEN-END:variables

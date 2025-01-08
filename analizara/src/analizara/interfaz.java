@@ -20,6 +20,7 @@ import java_cup.runtime.DefaultSymbolFactory;
 import java_cup.runtime.Symbol;
 import java_cup.runtime.SymbolFactory;
 import javax.swing.ImageIcon;
+import org.w3c.dom.css.RGBColor;
 
 /**
  *
@@ -98,6 +99,7 @@ public class interfaz extends javax.swing.JFrame {
         jLabel2.setText("Analisis Sintactico");
 
         jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -110,7 +112,9 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
 
+        jTextArea2.setBackground(new java.awt.Color(51, 51, 51));
         jTextArea2.setColumns(20);
+        jTextArea2.setForeground(new java.awt.Color(0, 255, 255));
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
@@ -135,6 +139,7 @@ public class interfaz extends javax.swing.JFrame {
         });
 
         jTextArea3.setEditable(false);
+        jTextArea3.setBackground(new java.awt.Color(51, 51, 51));
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);
@@ -158,7 +163,7 @@ public class interfaz extends javax.swing.JFrame {
                     .addComponent(jScrollPane3)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 599, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1))
@@ -177,7 +182,7 @@ public class interfaz extends javax.swing.JFrame {
                                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(closeWBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1))))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
@@ -305,6 +310,7 @@ public class interfaz extends javax.swing.JFrame {
             if(token==null){
                 resultado += "FIN";
                 jTextArea1.setText(resultado);
+                jTextArea1.setForeground(new Color(102, 255, 255));
                 return;
             }
             
@@ -331,16 +337,23 @@ public class interfaz extends javax.swing.JFrame {
         String ST = jTextArea2.getText();
         LexerCup lexer = new LexerCup(new StringReader(ST)); 
         Sintax s = new Sintax(lexer);
-        
+ 
         try {
             s.parse();
             jTextArea3.setText("Analisis realizado correctamente");
-            jTextArea3.setForeground(new Color(25, 111, 61));
+            jTextArea3.setForeground(new Color(51, 255, 153));
         } catch (Exception ex) {
             Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
             Symbol sym = s.getS();
-             jTextArea3.setText("Error de sintaxis: Linea --> " + (sym.right + 1) + "Columna --> "
-                     + (sym.left + 1 + ", Texto : \"" + sym.value + "\""));
+            
+            int linea= sym.right;
+            int lineaAnterior = linea;
+            int columna = sym.left;
+            
+            
+            
+             jTextArea3.setText("Error de sintaxis: \nLinea --> " + (linea+1 ) + "\nColumna --> "
+                     + (columna+ 1 + "\nTexto : \"" + sym.value + "\""));
             jTextArea3.setForeground(Color.red);
         }
         
