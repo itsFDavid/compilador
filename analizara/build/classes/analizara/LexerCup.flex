@@ -39,7 +39,7 @@ hasta {return new Symbol(sym.Hasta, yychar, yyline, yytext());}
 mientras {return new Symbol(sym.Mientras, yychar, yyline, yytext());}
 opcion {return new Symbol(sym.Opcion, yychar, yyline, yytext());}
 caso {return new Symbol(sym.Caso, yychar, yyline, yytext());}
-break {return new Symbol(sym.Break, yychar, yyline, yytext());}
+rompe {return new Symbol(sym.Rompe, yychar, yyline, yytext());}
 hacer {return new Symbol(sym.Hacer, yychar, yyline, yytext());}
 clase {return new Symbol(sym.Clase, yychar, yyline, yytext());}
 retorno {return new Symbol(sym.Retorno, yychar, yyline, yytext());}
