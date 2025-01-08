@@ -51,7 +51,7 @@ public enum Token{
     Estatico,
     Opcion,
     Caso,
-    Break,
+    Rompe,
     Hacer,
     Clase,
     Retorno,
