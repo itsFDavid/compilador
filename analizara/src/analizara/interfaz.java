@@ -43,8 +43,13 @@ public class interfaz extends javax.swing.JFrame {
         Image imagenLogOut = logOutIcon.getImage().getScaledInstance(40, 30, Image.SCALE_SMOOTH);;
         ImageIcon imagenEscaladaLogOut = new ImageIcon(imagenLogOut);
         
+        ImageIcon helpIcon = new ImageIcon(getClass().getResource("/resources/ayuda.png"));
+        Image imagenHelp = helpIcon.getImage().getScaledInstance(40, 30, Image.SCALE_SMOOTH);
+        ImageIcon imagenHelpEscaled = new ImageIcon(imagenHelp);
+        
         closeWBtn.setIcon(imagenEscaladaClose);
         logoutBtn.setIcon(imagenEscaladaLogOut);
+        ayudaBtn.setIcon(imagenHelpEscaled);
 
         closeWBtn.setContentAreaFilled(false);
         closeWBtn.setBorderPainted(false);
@@ -53,6 +58,10 @@ public class interfaz extends javax.swing.JFrame {
         logoutBtn.setContentAreaFilled(false);
         logoutBtn.setBorderPainted(false);
         logoutBtn.setFocusPainted(false);
+        
+        ayudaBtn.setContentAreaFilled(false);
+        ayudaBtn.setBorderPainted(false);
+        ayudaBtn.setFocusPainted(false);
         
     }
 
@@ -78,6 +87,7 @@ public class interfaz extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
+        ayudaBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +142,12 @@ public class interfaz extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Analisis Lexico");
 
+        ayudaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ayudaBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,6 +172,8 @@ public class interfaz extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ayudaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(closeWBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,7 +189,8 @@ public class interfaz extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addComponent(jLabel3))
                     .addComponent(closeWBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(logoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(logoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ayudaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
@@ -217,6 +236,12 @@ public class interfaz extends javax.swing.JFrame {
         // logica para cerrar sesion o algo asi
         
     }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void ayudaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudaBtnActionPerformed
+        // TODO add your handling code here:
+        Ayuda ayuda = new Ayuda();
+        ayuda.setVisible(true);
+    }//GEN-LAST:event_ayudaBtnActionPerformed
     
     private void openLogin(){
         dispose();
@@ -322,6 +347,7 @@ public class interfaz extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ayudaBtn;
     private javax.swing.JButton closeWBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
