@@ -337,7 +337,10 @@ public class interfaz extends javax.swing.JFrame {
         String ST = jTextArea2.getText();
         LexerCup lexer = new LexerCup(new StringReader(ST)); 
         Sintax s = new Sintax(lexer);
- 
+        
+
+        
+        
         try {
             s.parse();
             jTextArea3.setText("Analisis realizado correctamente");
@@ -346,14 +349,25 @@ public class interfaz extends javax.swing.JFrame {
             Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
             Symbol sym = s.getS();
             
-            int linea= sym.right;
-            int lineaAnterior = linea;
-            int columna = sym.left;
+            
+            String[] lineas = ST.split("\n");
+            
+            int lineaError = sym.right + 1;
+
+            // Calcular la columna real dentro de la línea
+            int posicionAbsoluta = (int)sym.left;
+            int posicionColumna = posicionAbsoluta;
+
+            // Restar la longitud de las líneas anteriores y sus saltos de línea
+            for(int i = 0; i < lineaError - 1 && i < lineas.length; i++) {
+                posicionColumna -= (lineas[i].length() + 1); // +1 por el salto de línea
+            }
             
             
-            
-             jTextArea3.setText("Error de sintaxis: \nLinea --> " + (linea+1 ) + "\nColumna --> "
-                     + (columna+ 1 + "\nTexto : \"" + sym.value + "\""));
+            jTextArea3.setText("Error de sintaxis: "
+                     + "\nLinea --> " + (lineaError) 
+                     + "\nColumna --> " + (posicionColumna + 1)
+                     + "\nTexto : \"" + sym.value + "\"");
             jTextArea3.setForeground(Color.red);
         }
         
